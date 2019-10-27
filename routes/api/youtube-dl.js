@@ -2,6 +2,18 @@ const express = require("express");
 const router = express.Router();
 const ytSearch = require("yt-search");
 const youtubedl = require("youtube-dl");
+const imagefinder = require("imagefinder");
+
+router.get("/image", function(req, res) {
+  console.log("query: " + req.query.query);
+
+  var query = req.query.query;
+  imagefinder({
+    keyword: query
+  }).then(images => {
+    res.json(images);
+  });
+});
 
 router.get("/audio", function(req, res) {
   console.log("query: " + req.query.query);
