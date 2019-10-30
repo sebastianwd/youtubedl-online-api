@@ -26,10 +26,15 @@ router.get("/audio", function(req, res) {
     const videos = results.videos;
     const url = "https://www.youtube.com" + videos[0].url;
 
-    youtubedl.exec(url, ["-f", "bestaudio", "-g"], {}, function(err, output) {
-      if (err) throw err;
-      res.json(output);
-    });
+    youtubedl.exec(
+      url,
+      ["-f", "bestaudio", "-g", "--geo-bypass-country", "PE"],
+      {},
+      function(err, output) {
+        if (err) throw err;
+        res.json(output);
+      }
+    );
   });
 });
 
